@@ -10,7 +10,8 @@ public class Banco {
 	 * @param monto
 	 */
 	public void extraerDeCuentaBancaria(CuentaBancaria cuentaBancaria, Double monto) {
-		System.out.println("Tipo de clase: " + cuentaBancaria.getClass().getName());
+		Class tipoClase = cuentaBancaria.getClass();
+		System.out.println("Tipo de clase: " + tipoClase.getName());
 		cuentaBancaria.extraer(monto);
 		System.out.println(cuentaBancaria);
 	}
