@@ -12,4 +12,8 @@ public class CajaDeAhorro extends CuentaBancaria {
 		}
 	}
 	
+	@Override
+	public String toString() {
+		return "CajaDeAhorro [numeroDeCuenta=" + super.getNumeroDeCuenta() + ", saldoActual=" + super.getSaldoActual()  + "]";
+	}
 }
