@@ -2,6 +2,12 @@ package edu.curso.java.cuetas;
 
 public class CajaDeAhorro extends CuentaBancaria {
 
+	
+	@Override
+	public String toString() {
+		return "CajaDeAhorro [numeroDeCuenta=" + super.getNumeroDeCuenta() + ", saldoActual=" + super.getSaldoActual()  + "]";
+	}
+
 	@Override
 	public void extraer(Double monto) {
 		Double nuevoSaldo = super.getSaldoActual() - monto;
@@ -12,8 +18,4 @@ public class CajaDeAhorro extends CuentaBancaria {
 		}
 	}
 	
-	@Override
-	public String toString() {
-		return "CajaDeAhorro [numeroDeCuenta=" + super.getNumeroDeCuenta() + ", saldoActual=" + super.getSaldoActual()  + "]";
-	}
 }

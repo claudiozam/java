@@ -23,6 +23,8 @@ public class Principal {
 		persona1.saludar();
 		persona1.saludar("Ejemplo");
 		persona1.saludar("Otro ejemplo", 10);
+		
+		
 	}
 
 }

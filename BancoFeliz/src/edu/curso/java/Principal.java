@@ -11,10 +11,11 @@ public class Principal {
 
 		Banco banco = new Banco();
 		
-		CuentaBancaria cuentaBancaria1 = new CuentaBancaria();
-		cuentaBancaria1.setNumeroDeCuenta(1234567L);
-		cuentaBancaria1.setSaldoActual(50000.0);
-		banco.extraerDeCuentaBancaria(cuentaBancaria1, 900000.0);
+		// No puedo hacer esto porque es abstract
+		//CuentaBancaria cuentaBancaria1 = new CuentaBancaria();
+		//cuentaBancaria1.setNumeroDeCuenta(1234567L);
+		//cuentaBancaria1.setSaldoActual(50000.0);
+		//banco.extraerDeCuentaBancaria(cuentaBancaria1, 900000.0);
 		//cuentaBancaria1.extraer(900000.0); //OJO!!!!!
 		//System.out.println(cuentaBancaria1);
 		

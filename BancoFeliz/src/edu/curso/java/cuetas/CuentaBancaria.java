@@ -1,6 +1,6 @@
 package edu.curso.java.cuetas;
 
-public class CuentaBancaria {
+public abstract class CuentaBancaria {
 
 	private Long numeroDeCuenta;
 	private Double saldoActual;
@@ -21,9 +21,7 @@ public class CuentaBancaria {
 		this.saldoActual = saldoActual;
 	}
 	
-	public void extraer(Double monto) {
-		saldoActual = saldoActual - monto;
-	}
+	public abstract void extraer(Double monto);
 
 	@Override
 	public String toString() {
