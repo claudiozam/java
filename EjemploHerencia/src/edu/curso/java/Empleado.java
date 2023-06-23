@@ -33,4 +33,11 @@ public class Empleado extends Persona {
 		return sueldo;
 	}
 
+	@Override
+	public String toString() {
+		return "Empleado [nombre=" + super.getNombre() + " sueldo=" + sueldo + "]";
+	}
+	
+	
+
 }

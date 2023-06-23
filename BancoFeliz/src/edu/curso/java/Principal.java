@@ -36,6 +36,11 @@ public class Principal {
 		cuentaCorriente.setLimiteExtra(90000.0);
 		banco.extraerDeCuentaBancaria(cuentaCorriente, 110000.0);
 
+		Cliente cliente1 = new Cliente();
+		cliente1.agregarCuentaBancanria(cajaDeAhorro);
+		cliente1.agregarCuentaBancanria(cuentaCorriente);
+		cliente1.setNumeroDecliente(423423423L);
+		cliente1.listarCuentas();
 		//cuentaCorriente.extraer(110000.0);
 		
 		//System.out.println(cuentaCorriente);

@@ -11,6 +11,15 @@ public class Principal {
 		
 		System.out.println(empleado1.getNombre() + " " + empleado1.getSueldo());
 		
+		Integer numeroInteger = 1034;
+
+		System.out.println(numeroInteger);
+		System.out.println(numeroInteger.toString());
+
+		System.out.println(empleado1);
+		System.out.println(empleado1.toString());
+		
+		
 	}
 
 }
