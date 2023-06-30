@@ -1,5 +1,7 @@
 package edu.curso.java.cuetas;
 
+import java.util.Objects;
+
 public abstract class CuentaBancaria {
 
 	private Long numeroDeCuenta;

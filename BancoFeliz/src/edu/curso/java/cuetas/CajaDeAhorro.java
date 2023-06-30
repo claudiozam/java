@@ -1,5 +1,7 @@
 package edu.curso.java.cuetas;
 
+import java.util.Objects;
+
 public class CajaDeAhorro extends CuentaBancaria {
 
 	
@@ -16,6 +18,23 @@ public class CajaDeAhorro extends CuentaBancaria {
 		} else {
 			System.out.println("No tenes tanta plata....");
 		}
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.getNumeroDeCuenta());
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CuentaBancaria other = (CuentaBancaria) obj;
+		return Objects.equals(super.getNumeroDeCuenta(), other.getNumeroDeCuenta());
 	}
 	
 }

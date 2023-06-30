@@ -1,5 +1,7 @@
 package edu.curso.java.cuetas;
 
+import java.util.Objects;
+
 public class CuentaCorriente extends CuentaBancaria {
 
 	private Double limiteExtra = 1000.0;
@@ -25,6 +27,23 @@ public class CuentaCorriente extends CuentaBancaria {
 	@Override
 	public String toString() {
 		return "CuentaCorriente [numeroDeCuenta=" + super.getNumeroDeCuenta() + ", saldoActual=" + super.getSaldoActual()  + ", limiteExtra=" + limiteExtra + "]";
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.getNumeroDeCuenta());
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CuentaBancaria other = (CuentaBancaria) obj;
+		return Objects.equals(super.getNumeroDeCuenta(), other.getNumeroDeCuenta());
 	}
 	
 }
