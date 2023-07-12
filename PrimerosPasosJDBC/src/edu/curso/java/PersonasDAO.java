@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class PersonasDAO {
 
-	public void guardarPersona(Persona persona) {
+	public void guardarPersona(Persona persona) throws PersonaException {
 		
 		Connection connection = null;
 		DBUtils dbUtils = new DBUtils();
@@ -20,10 +20,10 @@ public class PersonasDAO {
 			statementInsert.execute();
 
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			throw new PersonaException("Hay un problema al guardar la persona", e);
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+			throw new PersonaException("Hay un problema al guardar la persona", e);
+		} finally {  
 			if(connection != null) {
 				try {
 					connection.close();
@@ -32,7 +32,7 @@ public class PersonasDAO {
 		}
 	}
 	
-	public void actualizarPersona(Persona persona) {
+	public void actualizarPersona(Persona persona) throws PersonaException  {
 		Connection connection = null;
 		DBUtils dbUtils = new DBUtils();
 		try {
@@ -47,9 +47,9 @@ public class PersonasDAO {
 			statementUpdate.execute();
 
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			throw new PersonaException("Hay un problema al actualizar la persona", e);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new PersonaException("Hay un problema al actualizar la persona", e);
 		} finally {
 			if(connection != null) {
 				try {
@@ -59,7 +59,7 @@ public class PersonasDAO {
 		}
 	}
 	
-	public Persona buscarPersonaPorId(Long id) {
+	public Persona buscarPersonaPorId(Long id) throws PersonaException  {
 		Persona persona = null;
 		Connection connection = null;
 		DBUtils dbUtils = new DBUtils();
@@ -76,12 +76,13 @@ public class PersonasDAO {
 				persona.setNombre(resultado.getString("nombre"));
 				persona.setApellido(resultado.getString("apellido"));
 				persona.setEdad(resultado.getInt("edad"));
+			} else {
+				throw new PersonaException("No se encontro la persona con el id: " + id);
 			}
-
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			throw new PersonaException("Hay un problema al buscar la persona", e);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new PersonaException("Hay un problema al buscar la persona", e);
 		} finally {
 			if(connection != null) {
 				try {
@@ -92,7 +93,7 @@ public class PersonasDAO {
 		return persona;
 	}
 	
-	public void borrarPersona(Long id) {
+	public void borrarPersona(Long id) throws PersonaException  {
 		Connection connection = null;
 		DBUtils dbUtils = new DBUtils();
 		try {
@@ -104,9 +105,9 @@ public class PersonasDAO {
 			statementDelete.execute();
 
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			throw new PersonaException("Hay un problema al borrar la persona", e);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new PersonaException("Hay un problema al borrar la persona", e);
 		} finally {
 			if(connection != null) {
 				try {
@@ -116,7 +117,7 @@ public class PersonasDAO {
 		}
 	}
 	
-	public ArrayList<Persona> recuperarPersonas() {
+	public ArrayList<Persona> recuperarPersonas() throws PersonaException  {
 		ArrayList<Persona> personas = new ArrayList<Persona>();
 		Persona persona = null;
 		Connection connection = null;
@@ -137,9 +138,9 @@ public class PersonasDAO {
 			}
 
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			throw new PersonaException("Hay un problema al buscar a las persona", e);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new PersonaException("Hay un problema al buscar a las persona", e);
 		} finally {
 			if(connection != null) {
 				try {
