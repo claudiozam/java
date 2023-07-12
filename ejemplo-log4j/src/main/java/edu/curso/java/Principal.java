@@ -1,12 +1,18 @@
 package edu.curso.java;
 
 import java.sql.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 
 public class Principal {
 
+	private static final Logger logger = LogManager.getLogger(Principal.class);
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		logger.info("Iniciando mi programa de ejemplo de personas.....");
 		
 		PersonasDAO personasDAO = new PersonasDAO();
 
@@ -32,8 +38,7 @@ public class Principal {
 			
 			
 		} catch (PersonaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Hay un error general al trabajar con las personas", e);
 		}
 
 		

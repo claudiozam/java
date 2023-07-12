@@ -3,8 +3,16 @@ package edu.curso.java;
 import java.sql.*;
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import jdk.internal.org.jline.utils.Log;
+
 public class PersonasDAO {
 
+	private static final Logger logger = LogManager.getLogger(PersonasDAO.class);
+
+	
 	public void guardarPersona(Persona persona) throws PersonaException {
 		
 		Connection connection = null;
@@ -20,8 +28,10 @@ public class PersonasDAO {
 			statementInsert.execute();
 
 		} catch (ClassNotFoundException e) {
+			logger.error(e);
 			throw new PersonaException("Hay un problema al guardar la persona", e);
 		} catch (SQLException e) {
+			logger.error(e);
 			throw new PersonaException("Hay un problema al guardar la persona", e);
 		} finally {  
 			if(connection != null) {
@@ -47,8 +57,10 @@ public class PersonasDAO {
 			statementUpdate.execute();
 
 		} catch (ClassNotFoundException e) {
+			logger.error(e);
 			throw new PersonaException("Hay un problema al actualizar la persona", e);
 		} catch (SQLException e) {
+			logger.error(e);
 			throw new PersonaException("Hay un problema al actualizar la persona", e);
 		} finally {
 			if(connection != null) {
@@ -60,6 +72,7 @@ public class PersonasDAO {
 	}
 	
 	public Persona buscarPersonaPorId(Long id) throws PersonaException  {
+		logger.debug("Bucando la persona con el id: " + id);
 		Persona persona = null;
 		Connection connection = null;
 		DBUtils dbUtils = new DBUtils();
@@ -80,8 +93,10 @@ public class PersonasDAO {
 				throw new PersonaException("No se encontro la persona con el id: " + id);
 			}
 		} catch (ClassNotFoundException e) {
+			logger.error(e);
 			throw new PersonaException("Hay un problema al buscar la persona", e);
 		} catch (SQLException e) {
+			logger.error(e);
 			throw new PersonaException("Hay un problema al buscar la persona", e);
 		} finally {
 			if(connection != null) {
@@ -105,8 +120,10 @@ public class PersonasDAO {
 			statementDelete.execute();
 
 		} catch (ClassNotFoundException e) {
+			logger.error(e);
 			throw new PersonaException("Hay un problema al borrar la persona", e);
 		} catch (SQLException e) {
+			logger.error(e);
 			throw new PersonaException("Hay un problema al borrar la persona", e);
 		} finally {
 			if(connection != null) {
@@ -123,9 +140,11 @@ public class PersonasDAO {
 		Connection connection = null;
 		DBUtils dbUtils = new DBUtils();
 		try {
+			String sqlSelect = "SELECT id, nombre, apellido, edad  FROM personas";
+			logger.debug("Ejecutando el recuperar personas: " + sqlSelect);
+
 			connection = dbUtils.recuperarConnection();
 			
-			String sqlSelect = "SELECT id, nombre, apellido, edad  FROM personas";
 			PreparedStatement statementSelect = connection.prepareStatement(sqlSelect);
 			ResultSet resultado = statementSelect.executeQuery();
 			while(resultado.next() == true) {
@@ -138,8 +157,10 @@ public class PersonasDAO {
 			}
 
 		} catch (ClassNotFoundException e) {
+			logger.error(e);
 			throw new PersonaException("Hay un problema al buscar a las persona", e);
 		} catch (SQLException e) {
+			logger.error(e);
 			throw new PersonaException("Hay un problema al buscar a las persona", e);
 		} finally {
 			if(connection != null) {
