@@ -68,7 +68,7 @@ public class PersonasDAO {
 			
 			String sqlSelect = "SELECT id, nombre, apellido, edad  FROM  personas WHERE id = ?";
 			PreparedStatement statementSelect = connection.prepareStatement(sqlSelect);
-			statementSelect.setLong(1, persona.getId());
+			statementSelect.setLong(1, id);
 			ResultSet resultado = statementSelect.executeQuery();
 			if(resultado.next() == true) {
 				persona = new Persona();
@@ -93,10 +93,60 @@ public class PersonasDAO {
 	}
 	
 	public void borrarPersona(Long id) {
-		
+		Connection connection = null;
+		DBUtils dbUtils = new DBUtils();
+		try {
+			connection = dbUtils.recuperarConnection();
+			
+			String sqlDelete = "DELETE from personas WHERE id = ?";
+			PreparedStatement statementDelete = connection.prepareStatement(sqlDelete);
+			statementDelete.setLong(1, id);
+			statementDelete.execute();
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {}
+			}
+		}
 	}
 	
 	public ArrayList<Persona> recuperarPersonas() {
-		return null;
+		ArrayList<Persona> personas = new ArrayList<Persona>();
+		Persona persona = null;
+		Connection connection = null;
+		DBUtils dbUtils = new DBUtils();
+		try {
+			connection = dbUtils.recuperarConnection();
+			
+			String sqlSelect = "SELECT id, nombre, apellido, edad  FROM personas";
+			PreparedStatement statementSelect = connection.prepareStatement(sqlSelect);
+			ResultSet resultado = statementSelect.executeQuery();
+			while(resultado.next() == true) {
+				persona = new Persona();
+				persona.setId(resultado.getLong("id"));
+				persona.setNombre(resultado.getString("nombre"));
+				persona.setApellido(resultado.getString("apellido"));
+				persona.setEdad(resultado.getInt("edad"));
+				personas.add(persona);
+			}
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {}
+			}
+		}
+		return personas;
 	}
 }
