@@ -1,0 +1,65 @@
+package edu.curso.java;
+
+import java.util.*;
+import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+public class GestorDeCSV {
+	
+	public void leerCSV(String rutaDelArchivo) {
+
+		try {
+			File archivoCSV = new File(rutaDelArchivo);
+			FileReader fileReader = new FileReader(archivoCSV);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+			String linea = bufferedReader.readLine();
+			Integer contadorDeLineas = 0;
+			while(linea != null) {
+				
+				
+				System.out.println("Linea actual: " + linea);
+				if(contadorDeLineas >= 1) {
+					String[] registros = linea.split(";"); 
+					
+					Integer id = Integer.parseInt(registros[0]);
+					String nombre = registros[1];
+					String descripcion = registros[2];
+					Double precio = Double.parseDouble(registros[3]);
+					
+					SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+					
+					Date fechaAlta = null;
+					
+					try {
+						fechaAlta = dateFormat.parse(registros[4]);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					System.out.println("**** Datos del registro ****");
+					System.out.println(id);
+					System.out.println(nombre);
+					System.out.println(descripcion);
+					System.out.println(precio);
+					System.out.println(fechaAlta);
+					System.out.println("*****************");
+					
+				} else {
+					System.out.println("ojo que en la primer linea tengo texto del nombre de las columnas");
+				}
+
+				linea = bufferedReader.readLine();
+				contadorDeLineas = contadorDeLineas + 1;
+			}		
+			fileReader.close(); //TODO: Poner en el finally
+		} catch (Exception e) {
+			// TODO: HACER BIEN LA PARTE DE MANEJO DE ERRORES
+			e.printStackTrace();
+		} finally {
+			
+		}	
+	}
+
+}
