@@ -7,6 +7,38 @@ import java.text.SimpleDateFormat;
 
 public class GestorDeCSV {
 	
+	
+	public void escribirCSV(String rutaDelArchivo, ArrayList<Producto> productos) {
+		
+		File archivoCSV = new File(rutaDelArchivo);
+		
+		FileWriter fileWriter = null;
+		
+		try {
+			fileWriter = new FileWriter(archivoCSV);
+
+			fileWriter.write("ID;NOMBRE;DESCRIPCION;PRECIO;FECHAALTA\n");				
+
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			
+			for (Producto p : productos) {
+				fileWriter.write(p.getId() + ";" 
+						+ p.getNombre() + ";" 
+						+ p.getDescripcion() + ";" 
+						+ p.getPrecio() + ";"
+						+ dateFormat.format(p.getFechaAlta()) + "\n");				
+			}
+			
+			
+			fileWriter.close(); //TODO: Poner en el finally
+		} catch (Exception e) {
+			// TODO: HACER BIEN LA PARTE DE MANEJO DE ERRORES
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	public void leerCSV(String rutaDelArchivo) {
 
 		try {
