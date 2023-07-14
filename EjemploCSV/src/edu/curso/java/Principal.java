@@ -8,10 +8,17 @@ public class Principal {
 
 	public static void main(String[] args) {
 		GestorDeCSV gestorDeCSV = new GestorDeCSV();
+
+		System.out.println("Recuperando productos del CSV");
 		//   C:/tmp/listado_de_productos.csv
-		gestorDeCSV.leerCSV("/tmp/listado_de_productos.csv");
+		ArrayList<Producto> productosRecuperados = gestorDeCSV.leerCSV("/tmp/listado_de_productos.csv");
 		
-		
+		for (Producto p : productosRecuperados) {
+			System.out.println(p);
+		}
+
+		System.out.println("Generando productos en el CSV");
+
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 		
 		productos.add(new Producto("TV LCD 32", "Ejemplo de TV LCD de 32 pulgadas",280000.0, new Date(), 1));
@@ -20,6 +27,9 @@ public class Principal {
 		
 		gestorDeCSV.escribirCSV("/tmp/listado_de_productos_generado.csv", productos);
 			
+		
+		
+		
 	}
 
 }

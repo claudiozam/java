@@ -39,8 +39,8 @@ public class GestorDeCSV {
 	}
 	
 	
-	public void leerCSV(String rutaDelArchivo) {
-
+	public ArrayList<Producto> leerCSV(String rutaDelArchivo) {
+		ArrayList<Producto> productos = new ArrayList<Producto>();
 		try {
 			File archivoCSV = new File(rutaDelArchivo);
 			FileReader fileReader = new FileReader(archivoCSV);
@@ -49,9 +49,8 @@ public class GestorDeCSV {
 			Integer contadorDeLineas = 0;
 			while(linea != null) {
 				
-				
 				System.out.println("Linea actual: " + linea);
-				if(contadorDeLineas >= 1) {
+				if(contadorDeLineas >= 1 && linea.isBlank() == false) {
 					String[] registros = linea.split(";"); 
 					
 					Integer id = Integer.parseInt(registros[0]);
@@ -70,13 +69,7 @@ public class GestorDeCSV {
 						e.printStackTrace();
 					}
 					
-					System.out.println("**** Datos del registro ****");
-					System.out.println(id);
-					System.out.println(nombre);
-					System.out.println(descripcion);
-					System.out.println(precio);
-					System.out.println(fechaAlta);
-					System.out.println("*****************");
+					productos.add(new Producto(nombre, descripcion, precio, fechaAlta, id));
 					
 				} else {
 					System.out.println("ojo que en la primer linea tengo texto del nombre de las columnas");
@@ -92,6 +85,8 @@ public class GestorDeCSV {
 		} finally {
 			
 		}	
+		
+		return productos;
 	}
 
 }
