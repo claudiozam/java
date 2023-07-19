@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 public class GestorDeCSV {
 	
 	
-	public void escribirCSV(String rutaDelArchivo, ArrayList<Producto> productos) {
+	public void escribirCSV(String rutaDelArchivo, ArrayList<Producto> productos) throws ProductoException {
 		
 		File archivoCSV = new File(rutaDelArchivo);
 		
@@ -32,18 +32,25 @@ public class GestorDeCSV {
 			
 			fileWriter.close(); //TODO: Poner en el finally
 		} catch (Exception e) {
-			// TODO: HACER BIEN LA PARTE DE MANEJO DE ERRORES
-			e.printStackTrace();
+			throw new ProductoException("Hay un problema al generar el archivo csv: " + rutaDelArchivo, e);
+		} finally {
+			if(fileWriter != null) {
+				try {
+					fileWriter.close();
+				} catch (IOException e) {}				
+			}
+
 		}
 		
 	}
 	
 	
-	public ArrayList<Producto> leerCSV(String rutaDelArchivo) {
+	public ArrayList<Producto> leerCSV(String rutaDelArchivo) throws ProductoException {
 		ArrayList<Producto> productos = new ArrayList<Producto>();
+		FileReader fileReader = null;
 		try {
 			File archivoCSV = new File(rutaDelArchivo);
-			FileReader fileReader = new FileReader(archivoCSV);
+			fileReader = new FileReader(archivoCSV);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			String linea = bufferedReader.readLine();
 			Integer contadorDeLineas = 0;
@@ -78,12 +85,15 @@ public class GestorDeCSV {
 				linea = bufferedReader.readLine();
 				contadorDeLineas = contadorDeLineas + 1;
 			}		
-			fileReader.close(); //TODO: Poner en el finally
 		} catch (Exception e) {
-			// TODO: HACER BIEN LA PARTE DE MANEJO DE ERRORES
-			e.printStackTrace();
+			throw new ProductoException("Hay un problema al leer el archivo csv: " + rutaDelArchivo, e);
 		} finally {
-			
+			if(fileReader != null) {
+				try {
+					fileReader.close();
+				} catch (IOException e) { }				
+			}
+
 		}	
 		
 		return productos;
