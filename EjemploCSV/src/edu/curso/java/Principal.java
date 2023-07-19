@@ -10,7 +10,7 @@ public class Principal {
 		GestorDeCSV gestorDeCSV = new GestorDeCSV();
 		GestorDeProductoJDBC gestorDeProductoJDBC = new GestorDeProductoJDBC();
 		
-		/*
+		
 		System.out.println("Recuperando productos del CSV");
 		//   C:/tmp/listado_de_productos.csv
 		ArrayList<Producto> productosRecuperados;
@@ -27,7 +27,6 @@ public class Principal {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
 		
 
 	
